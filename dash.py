@@ -52,6 +52,7 @@ def create_growth_chart(data, platform, color):
     return fig
 
 # ====================== НАСТРОЙКА СТРАНИЦ ======================
+st.set_page_config(layout="wide")
 if 'page' not in st.session_state:
     st.session_state.page = 'page1'  # По умолчанию первая страница
 
