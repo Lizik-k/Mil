@@ -414,7 +414,7 @@ if st.session_state.page == 'page2':
 
     # Получаем последние и предыдущие данные
     latest_date = filtered_df['Дата'].max()
-    previous_date = filtered_df[filtered_df['Дата'] < latest_date]['Дата'].max()
+    previous_date = filtered_df['Дата'].min()
 
     if pd.notna(previous_date):
         latest_data = filtered_df[filtered_df['Дата'] == latest_date]
@@ -432,9 +432,10 @@ if st.session_state.page == 'page2':
             total_previous = comparison[previous_col].sum()
             # Процентное изменение
             if total_previous != 0:
-                pct_change = ((total_current - total_previous) / total_previous) * 100
-                change_text = f"{abs(pct_change):.2f}%"  # {'↑' if pct_change > 0 else '↓'}
+                pct_change = (total_current / total_previous - 1) * 100
+                change_text = f"{abs(pct_change):.2f}"  # {'↑' if pct_change > 0 else '↓'}
                 delta_value = round(pct_change, 2)
+                delta_value = f"{delta_value:+.2f}%"
             else:
                 pct_change = 0
                 change_text = "N/A (нет предыдущих данных)"
@@ -452,11 +453,13 @@ if st.session_state.page == 'page2':
             # Общее количество подписчиков
             total_current = comparison[current_col].sum()
             total_previous = comparison[previous_col].sum()
+
             # Процентное изменение
             if total_previous != 0:
-                pct_change = ((total_current - total_previous) / total_previous) * 100
-                change_text = f"{abs(pct_change):.2f}%"  # {'↑' if pct_change > 0 else '↓'}
+                pct_change = (total_current/ total_previous - 1) * 100
+                change_text = f"{abs(pct_change):.2f}"  # {'↑' if pct_change > 0 else '↓'}
                 delta_value = round(pct_change, 2)
+                delta_value = f"{delta_value:+.2f}%"
             else:
                 pct_change = 0
                 change_text = "N/A (нет предыдущих данных)"
@@ -476,9 +479,10 @@ if st.session_state.page == 'page2':
             total_previous = comparison[previous_col].sum()
             # Процентное изменение
             if total_previous != 0:
-                pct_change = ((total_current - total_previous) / total_previous) * 100
-                change_text = f"{abs(pct_change):.2f}%"  # {'↑' if pct_change > 0 else '↓'}
+                pct_change = (total_current / total_previous - 1) * 100
+                change_text = f"{abs(pct_change):.2f}"  # {'↑' if pct_change > 0 else '↓'}
                 delta_value = round(pct_change, 2)
+                delta_value = f"{delta_value:+.2f}%"
             else:
                 pct_change = 0
                 change_text = "N/A (нет предыдущих данных)"
